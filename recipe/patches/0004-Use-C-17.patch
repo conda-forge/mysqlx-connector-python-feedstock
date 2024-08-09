@@ -1,4 +1,4 @@
-From ee01def5bc1994816dd71525827bba8c7d162972 Mon Sep 17 00:00:00 2001
+From 0c35939c2e7d9df8e16c82e4ee9843b6b9d297f1 Mon Sep 17 00:00:00 2001
 From: "Uwe L. Korn" <uwe.korn@quantco.com>
 Date: Wed, 21 Feb 2024 14:55:36 +0100
 Subject: [PATCH 4/6] Use C++17
@@ -8,7 +8,7 @@ Subject: [PATCH 4/6] Use C++17
  1 file changed, 5 insertions(+), 2 deletions(-)
 
 diff --git a/mysqlx-connector-python/cpydist/__init__.py b/mysqlx-connector-python/cpydist/__init__.py
-index bf81d2e..1a47152 100644
+index 6fdd0ec..d6580fb 100644
 --- a/mysqlx-connector-python/cpydist/__init__.py
 +++ b/mysqlx-connector-python/cpydist/__init__.py
 @@ -315,8 +315,11 @@ class BuildExt(build_ext, BaseCommand):

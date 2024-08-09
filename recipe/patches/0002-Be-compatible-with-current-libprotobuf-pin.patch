@@ -1,4 +1,4 @@
-From 62b249fbab21fc9423c8f01174eab9b8bd9ecefa Mon Sep 17 00:00:00 2001
+From 6bb905ec9abe8d73b201eabfe936d17d07a6a6c2 Mon Sep 17 00:00:00 2001
 From: "Uwe L. Korn" <uwe.korn@quantco.com>
 Date: Wed, 21 Feb 2024 15:03:46 +0100
 Subject: [PATCH 2/6] Be compatible with current libprotobuf pin
@@ -8,7 +8,7 @@ Subject: [PATCH 2/6] Be compatible with current libprotobuf pin
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/mysqlx-connector-python/setup.py b/mysqlx-connector-python/setup.py
-index f9bfb5c..a3fadaf 100644
+index 99d7ac3..222210f 100644
 --- a/mysqlx-connector-python/setup.py
 +++ b/mysqlx-connector-python/setup.py
 @@ -141,7 +141,7 @@ def main() -> None:
