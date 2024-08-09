@@ -1,4 +1,4 @@
-From 54adef7ac54c3f11fd64ffb39060d16c0e123c1e Mon Sep 17 00:00:00 2001
+From 7085fc49c8c5c1db18c4d141d9f586b992beb1f7 Mon Sep 17 00:00:00 2001
 From: Nehal J Wani <nehaljw.kkd1@gmail.com>
 Date: Sun, 29 May 2022 22:41:00 -0400
 Subject: [PATCH 1/6] Replace google::protobuf::string with std::string
@@ -9,10 +9,10 @@ xref: https://github.com/protocolbuffers/protobuf/issues/9943
  1 file changed, 3 insertions(+), 3 deletions(-)
 
 diff --git a/mysqlx-connector-python/src/mysqlxpb/mysqlxpb.cc b/mysqlx-connector-python/src/mysqlxpb/mysqlxpb.cc
-index 6294050..b2fae0a 100644
+index 488c6e6..08cf00a 100644
 --- a/mysqlx-connector-python/src/mysqlxpb/mysqlxpb.cc
 +++ b/mysqlx-connector-python/src/mysqlxpb/mysqlxpb.cc
-@@ -439,14 +439,14 @@ static void AddPyListToMessageRepeatedString(
+@@ -440,14 +440,14 @@ static void AddPyListToMessageRepeatedString(
      google::protobuf::Message& message,
      const google::protobuf::FieldDescriptor& field,
      PyObject* list) {

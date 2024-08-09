@@ -1,4 +1,4 @@
-From c5dbcfb46e0607968ef6cd82f4b216b0b3b9152f Mon Sep 17 00:00:00 2001
+From 1f3194dd578ad122bbfec0ee4ffe716e2e692518 Mon Sep 17 00:00:00 2001
 From: Nehal J Wani <nehaljw.kkd1@gmail.com>
 Date: Mon, 10 May 2021 07:20:17 -0400
 Subject: [PATCH 3/6] Revert "Fix MacOS wheels platform tag"
@@ -9,7 +9,7 @@ This reverts commit d1e89fd3d7391084cdf35b0806cb5d2a4b413654.
  1 file changed, 1 insertion(+), 4 deletions(-)
 
 diff --git a/mysqlx-connector-python/cpydist/__init__.py b/mysqlx-connector-python/cpydist/__init__.py
-index 9b9a757..bf81d2e 100644
+index ddd2ab1..6fdd0ec 100644
 --- a/mysqlx-connector-python/cpydist/__init__.py
 +++ b/mysqlx-connector-python/cpydist/__init__.py
 @@ -38,7 +38,7 @@ import tempfile
