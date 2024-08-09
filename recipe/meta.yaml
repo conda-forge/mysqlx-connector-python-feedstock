@@ -1,5 +1,5 @@
 {% set name = "mysqlx-connector-python" %}
-{% set version = "8.4.0" %}
+{% set version = "9.0.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,14 +7,13 @@ package:
 
 source:
   url: https://github.com/mysql/mysql-connector-python/archive/{{ version }}.tar.gz
-  sha256: 52944d6fa84c903fd70723a47d2f8c3153c50ae91773f1584a7bd30606c58b35
+  sha256: 72c75ccb759cee31474906538b3132f3e26bc91d2913b415ea10d699876dbf9c
   patches:
-    - patches/0001-Replace-google-protobuf-string-with-std-string.patch
-    - patches/0002-Be-compatible-with-current-libprotobuf-pin.patch
-    - patches/0003-Revert-Fix-MacOS-wheels-platform-tag.patch
-    - patches/0004-Use-C-17.patch
-    - patches/0005-Link-to-abseil_dll-on-Windows.patch
-    - patches/0006-Don-t-ignore-user-provided-xtra-compile-link-args.patch
+    - patches/0001-Be-compatible-with-current-libprotobuf-pin.patch
+    - patches/0002-Revert-Fix-MacOS-wheels-platform-tag.patch
+    - patches/0003-Use-C-17.patch
+    - patches/0004-Link-to-abseil_dll-on-Windows.patch
+    - patches/0005-Don-t-ignore-user-provided-xtra-compile-link-args.patch
 
 build:
   number: 0
@@ -32,6 +31,7 @@ requirements:
     - python
     - pip
     - libprotobuf
+    - libabseil
     - protobuf
   run:
     - python
