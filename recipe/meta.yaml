@@ -30,6 +30,7 @@ requirements:
   host:
     - python
     - pip
+    - setuptools
     - libprotobuf
     - libabseil
     - protobuf
