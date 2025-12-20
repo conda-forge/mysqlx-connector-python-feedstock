@@ -17,6 +17,7 @@ source:
     - patches/0003-Use-C-17.patch
     - patches/0004-Link-to-abseil_dll-on-Windows.patch
     - patches/0005-Don-t-ignore-user-provided-xtra-compile-link-args.patch
+    - patches/0001-Fix-compatibility-with-newer-protobuf-and-abseil-lib.patch
 
 build:
   number: 0
