@@ -1,7 +1,7 @@
-From 24a27ad8da154bfe619034dabbbcd2c8589960a7 Mon Sep 17 00:00:00 2001
+From 3a4d0a4119646ca5cbbdc916885783757c4aa410 Mon Sep 17 00:00:00 2001
 From: "Uwe L. Korn" <uwe.korn@quantco.com>
 Date: Wed, 21 Feb 2024 14:55:36 +0100
-Subject: [PATCH 3/5] Use C++17
+Subject: [PATCH 3/6] Use C++17
 
 ---
  mysqlx-connector-python/cpydist/__init__.py | 7 +++++--
@@ -26,6 +26,3 @@ index 5b540b6..617c26b 100644
              self._run_protoc()
  
              # Suppress unknown pragmas
--- 
-2.45.2
-

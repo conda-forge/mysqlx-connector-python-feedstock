@@ -1,7 +1,7 @@
-From 4a02ad33c987afefbaf2ae03ab3ae9b6a9748090 Mon Sep 17 00:00:00 2001
+From 2200e66f6b5927bec1af71d5f5dc42efe6863faf Mon Sep 17 00:00:00 2001
 From: Nehal J Wani <nehaljw.kkd1@gmail.com>
 Date: Mon, 10 May 2021 07:20:17 -0400
-Subject: [PATCH 2/5] Revert "Fix MacOS wheels platform tag"
+Subject: [PATCH 2/6] Revert "Fix MacOS wheels platform tag"
 
 This reverts commit d1e89fd3d7391084cdf35b0806cb5d2a4b413654.
 ---
@@ -31,6 +31,3 @@ index 177ef57..5b540b6 100644
  COMMON_USER_OPTIONS = [
      (
          "byte-code-only",
--- 
-2.45.2
-

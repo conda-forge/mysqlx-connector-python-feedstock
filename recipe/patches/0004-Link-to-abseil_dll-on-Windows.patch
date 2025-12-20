@@ -1,7 +1,7 @@
-From df20ef8f233dfbd2bf22d0c8407f196a11b9ad1e Mon Sep 17 00:00:00 2001
+From daa40f143905da6cdf4387c53d72b12a5c29f498 Mon Sep 17 00:00:00 2001
 From: "Uwe L. Korn" <uwe.korn@quantco.com>
 Date: Wed, 21 Feb 2024 20:27:00 +0100
-Subject: [PATCH 4/5] Link to abseil_dll on Windows
+Subject: [PATCH 4/6] Link to abseil_dll on Windows
 
 ---
  mysqlx-connector-python/cpydist/__init__.py | 3 ++-
@@ -21,6 +21,3 @@ index 617c26b..e20494f 100644
  # Load version information
  VERSION = [999, 0, 0, "a", 0]
  VERSION_TEXT = "999.0.0"
--- 
-2.45.2
-
