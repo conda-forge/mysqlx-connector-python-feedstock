@@ -2,7 +2,7 @@ schema_version: 1
 
 context:
   name: mysqlx-connector-python
-  version: 9.5.0
+  version: "9.6.0"
 
 package:
   name: ${{ name|lower }}
@@ -10,7 +10,7 @@ package:
 
 source:
   url: https://github.com/mysql/mysql-connector-python/archive/${{ version }}.tar.gz
-  sha256: ecbe9091f7aa785b27d5ee2ae8b6b56eedbec21be24d4a37c6cdc2d0a0154ae7
+  sha256: 8d1b2a52a8183bbfee20ac8be0e31a2420504a35f9223badd0756627b5226ecf
   patches:
     - patches/0001-Be-compatible-with-current-libprotobuf-pin.patch
     - patches/0002-Revert-Fix-MacOS-wheels-platform-tag.patch
@@ -20,14 +20,14 @@ source:
     - patches/0006-Fix-compatibility-with-newer-protobuf-and-abseil-lib.patch
 
 build:
-  number: 1
+  number: 0
 
 requirements:
   build:
     - if: build_platform != target_platform
-      then: python
-    - if: build_platform != target_platform
-      then: cross-python_${{ target_platform }}
+      then:
+        - python
+        - cross-python_${{ target_platform }}
     - ${{ compiler('c') }}
     - ${{ compiler('cxx') }}
     - ${{ stdlib("c") }}
