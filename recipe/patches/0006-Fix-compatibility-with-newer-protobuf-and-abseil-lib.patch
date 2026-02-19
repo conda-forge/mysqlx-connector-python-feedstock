@@ -1,4 +1,4 @@
-From ea2357b2ac9b7eaa7aeb377e0d5eddff71a6a6bd Mon Sep 17 00:00:00 2001
+From d508c6555a3ca932a99dcdf60cd9bbe72d678c52 Mon Sep 17 00:00:00 2001
 From: "Uwe L. Korn" <uwe.korn@quantco.com>
 Date: Sat, 20 Dec 2025 08:47:57 +0100
 Subject: [PATCH 6/6] Fix compatibility with newer protobuf and abseil
@@ -15,23 +15,25 @@ now return std::string_view instead of std::string.
 
 Co-Authored-By: Claude <noreply@anthropic.com>
 ---
- mysqlx-connector-python/cpydist/__init__.py      |  7 ++++---
+ mysqlx-connector-python/cpydist/__init__.py      |  9 ++++-----
  mysqlx-connector-python/src/mysqlxpb/mysqlxpb.cc | 11 ++++++-----
- 2 files changed, 10 insertions(+), 8 deletions(-)
+ 2 files changed, 10 insertions(+), 10 deletions(-)
 
 diff --git a/mysqlx-connector-python/cpydist/__init__.py b/mysqlx-connector-python/cpydist/__init__.py
-index c0ce77e..8836e83 100644
+index c0ce77e..983122a 100644
 --- a/mysqlx-connector-python/cpydist/__init__.py
 +++ b/mysqlx-connector-python/cpydist/__init__.py
-@@ -60,7 +60,6 @@ ABSL_LIBS = (
+@@ -58,9 +58,7 @@ ABSL_LIBS = (
+     "absl_str_format_internal",
+     "absl_strings",
      "absl_strings_internal",
-     "absl_string_view",
+-    "absl_string_view",
      "absl_log_initialize",
 -    "absl_log_entry",
      "absl_log_flags",
      "absl_log_severity",
      "absl_log_internal_check_op",
-@@ -74,7 +73,7 @@ ABSL_LIBS = (
+@@ -74,7 +72,7 @@ ABSL_LIBS = (
      "absl_log_sink",
      "absl_raw_logging_internal",
      "absl_log_globals",
@@ -40,7 +42,7 @@ index c0ce77e..8836e83 100644
      "absl_cord",
      "absl_cordz_info",
      "absl_cordz_handle",
-@@ -90,6 +89,7 @@ ABSL_LIBS = (
+@@ -90,6 +88,7 @@ ABSL_LIBS = (
      "absl_kernel_timeout_internal",
      "absl_time",
      "absl_time_zone",
@@ -48,7 +50,12 @@ index c0ce77e..8836e83 100644
      "absl_int128",
      "absl_examine_stack",
      "absl_stacktrace",
-@@ -107,7 +107,8 @@ ABSL_LIBS = (
+@@ -102,12 +101,12 @@ ABSL_LIBS = (
+     "absl_raw_hash_set",
+     "absl_hash",
+     "absl_city",
+-    "absl_low_level_hash",
+     "absl_base",
      "absl_spinlock_wait",
      "absl_status",
      "absl_statusor",

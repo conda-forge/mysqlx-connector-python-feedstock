@@ -1,4 +1,4 @@
-From 2200e66f6b5927bec1af71d5f5dc42efe6863faf Mon Sep 17 00:00:00 2001
+From ba5ab5ca562494b7b0eb77fa60188026341514c3 Mon Sep 17 00:00:00 2001
 From: Nehal J Wani <nehaljw.kkd1@gmail.com>
 Date: Mon, 10 May 2021 07:20:17 -0400
 Subject: [PATCH 2/6] Revert "Fix MacOS wheels platform tag"
