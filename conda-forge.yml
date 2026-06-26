@@ -1,7 +1,8 @@
 bot:
   automerge: true
-build_platform:
-  osx_arm64: osx_64
+provider:
+  osx_arm64: default
+  linux_aarch64: default
 conda_build:
   error_overlinking: true
 conda_build_tool: rattler-build
