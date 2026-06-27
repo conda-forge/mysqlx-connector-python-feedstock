@@ -8,16 +8,17 @@ Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
 Update ABSL_LIBS to reflect renamed/added abseil library components and
-fix mysqlxpb.cc to handle protobuf API change where field name methods
-now return std::string_view instead of std::string.
+fix mysqlxpb.cc to handle protobuf API changes:
+- field name methods now return std::string_view instead of std::string
+- FieldDescriptor::label() has been removed, use is_repeated()/is_required() instead
 
 🤖 Generated with [Claude Code](https://claude.com/claude-code)
 
 Co-Authored-By: Claude <noreply@anthropic.com>
 ---
  mysqlx-connector-python/cpydist/__init__.py      |  9 ++++-----
- mysqlx-connector-python/src/mysqlxpb/mysqlxpb.cc | 11 ++++++-----
- 2 files changed, 10 insertions(+), 10 deletions(-)
+ mysqlx-connector-python/src/mysqlxpb/mysqlxpb.cc | 33 +++++++++++++------------
+ 2 files changed, 22 insertions(+), 20 deletions(-)
 
 diff --git a/mysqlx-connector-python/cpydist/__init__.py b/mysqlx-connector-python/cpydist/__init__.py
 index c0ce77e..983122a 100644
@@ -108,12 +109,57 @@ index 08cf00a..383a1d0 100644
  
      // PyDict_SetItemString does not steal a reference to val (last argument).
      PyDict_SetItemString(dict, kMessageTypeKey, desc_full_name);
-@@ -656,7 +657,7 @@ static PyObject* CreateMessage(const google::protobuf::Message& message) {
+@@ -640,26 +641,19 @@ static PyObject* CreateMessage(const google::protobuf::Message& message) {
+     for (int idx = 0; idx < descriptor->field_count(); ++idx) {
+       const google::protobuf::FieldDescriptor* field = descriptor->field(idx);
+ 
+-      switch (field->label()) {
+-        case google::protobuf::FieldDescriptor::LABEL_REQUIRED: {
+-          PythonAddDict(dict, message, *field);
+-          break;
+-        }
+-        case google::protobuf::FieldDescriptor::LABEL_OPTIONAL: {
+-          if (reflection->HasField(message, field))
+-            PythonAddDict(dict, message, *field);
+-          break;
+-        }
+-        case google::protobuf::FieldDescriptor::LABEL_REPEATED: {
++      if (field->is_repeated()) {
+           int listSize = reflection->FieldSize(message, field);
+           PyObject* list = PyList_New(listSize);
  
            for (int idx = 0; idx < listSize; ++idx)
              PythonAddList(list, idx, message, *field);
 -          PyDict_SetItemString(dict, field->name().c_str(), list);
 +          PyDict_SetItemString(dict, std::string(field->name()).c_str(), list);
            Py_CLEAR(list);
-           break;
-         }
+-          break;
+-        }
++      } else if (field->is_required()) {
++          PythonAddDict(dict, message, *field);
++      } else {
++          if (reflection->HasField(message, field))
++            PythonAddDict(dict, message, *field);
+       }
+     }
+   } catch(std::exception& e) {
+@@ -705,16 +699,10 @@ static google::protobuf::Message* CreateMessage(PyObject* dict,
+                 const google::protobuf::FieldDescriptor* field =
+                     descriptor->FindFieldByName(key_name);
+ 
+-                switch (field->label()) {
+-                  case google::protobuf::FieldDescriptor::LABEL_OPTIONAL:
+-                  case google::protobuf::FieldDescriptor::LABEL_REQUIRED: {
+-                    ConvertPyToPbRequired(*message, *field, factory, value);
+-                    break;
+-                  }
+-                  case google::protobuf::FieldDescriptor::LABEL_REPEATED: {
++                if (field->is_repeated()) {
+                     ConvertPyToPbRepeated(*message, *field, factory, value);
+-                    break;
+-                  }
++                } else {
++                    ConvertPyToPbRequired(*message, *field, factory, value);
+                 }
+               } else {
+                 PyErr_SetString(PyExc_RuntimeError,
