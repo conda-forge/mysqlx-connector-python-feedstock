@@ -1,27 +1,30 @@
-From d508c6555a3ca932a99dcdf60cd9bbe72d678c52 Mon Sep 17 00:00:00 2001
+From 59d8531d97c80106a262468a9e16670a8db7a404 Mon Sep 17 00:00:00 2001
 From: "Uwe L. Korn" <uwe.korn@quantco.com>
-Date: Sat, 20 Dec 2025 08:47:57 +0100
-Subject: [PATCH 6/6] Fix compatibility with newer protobuf and abseil
- libraries
+Date: Tue, 3 Nov 2026 16:21:04 +0000
+Subject: [PATCH 6/6] Fix compatibility with newer protobuf and abseil libraries
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Update ABSL_LIBS to reflect renamed/added abseil library components and
-fix mysqlxpb.cc to handle protobuf API changes:
+Update ABSL_LIBS to reflect renamed/added/removed abseil library components
+and fix mysqlxpb.cc to handle protobuf API changes:
 - field name methods now return std::string_view instead of std::string
 - FieldDescriptor::label() has been removed, use is_repeated()/is_required() instead
+
+abseil 20260817 merged the CRC CPU detection component into
+absl_base_cpu_detect, so the now-missing absl_crc_cpu_detect must no longer
+be linked unconditionally.
 
 🤖 Generated with [Claude Code](https://claude.com/claude-code)
 
 Co-Authored-By: Claude <noreply@anthropic.com>
 ---
- mysqlx-connector-python/cpydist/__init__.py      |  9 ++++-----
- mysqlx-connector-python/src/mysqlxpb/mysqlxpb.cc | 33 +++++++++++++------------
- 2 files changed, 22 insertions(+), 20 deletions(-)
+ mysqlx-connector-python/cpydist/__init__.py   | 10 ++---
+ .../src/mysqlxpb/mysqlxpb.cc                  | 42 +++++++------------
+ 2 files changed, 19 insertions(+), 33 deletions(-)
 
 diff --git a/mysqlx-connector-python/cpydist/__init__.py b/mysqlx-connector-python/cpydist/__init__.py
-index c0ce77e..983122a 100644
+index 36ffa58..8698ef5 100644
 --- a/mysqlx-connector-python/cpydist/__init__.py
 +++ b/mysqlx-connector-python/cpydist/__init__.py
 @@ -58,9 +58,7 @@ ABSL_LIBS = (
@@ -43,7 +46,15 @@ index c0ce77e..983122a 100644
      "absl_cord",
      "absl_cordz_info",
      "absl_cordz_handle",
-@@ -90,6 +88,7 @@ ABSL_LIBS = (
+@@ -82,7 +80,6 @@ ABSL_LIBS = (
+     "absl_cord_internal",
+     "absl_crc_cord_state",
+     "absl_crc32c",
+-    "absl_crc_cpu_detect",
+     "absl_crc_internal",
+     "absl_exponential_biased",
+     "absl_synchronization",
+@@ -90,6 +87,7 @@ ABSL_LIBS = (
      "absl_kernel_timeout_internal",
      "absl_time",
      "absl_time_zone",
@@ -51,7 +62,7 @@ index c0ce77e..983122a 100644
      "absl_int128",
      "absl_examine_stack",
      "absl_stacktrace",
-@@ -102,12 +101,12 @@ ABSL_LIBS = (
+@@ -102,12 +100,12 @@ ABSL_LIBS = (
      "absl_raw_hash_set",
      "absl_hash",
      "absl_city",
@@ -67,7 +78,7 @@ index c0ce77e..983122a 100644
  
  # Load version information
 diff --git a/mysqlx-connector-python/src/mysqlxpb/mysqlxpb.cc b/mysqlx-connector-python/src/mysqlxpb/mysqlxpb.cc
-index 08cf00a..383a1d0 100644
+index 6268c30..24be251 100644
 --- a/mysqlx-connector-python/src/mysqlxpb/mysqlxpb.cc
 +++ b/mysqlx-connector-python/src/mysqlxpb/mysqlxpb.cc
 @@ -37,6 +37,7 @@
